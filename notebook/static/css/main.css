@@ -1,0 +1,77 @@
+.dropdown-element {
+    position: relative;
+    display: inline-block;
+}
+
+.searchbar {
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+}
+
+header h1 {
+    padding-left: 10mm;
+}
+
+header a {
+    padding-left: 10mm;
+}
+
+header {
+    background-color: rgb(212, 218, 222);
+    height:20mm;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+}
+
+article {
+    background-color:#f1f1f1;
+    padding: 5% 5%;
+    width: 90%;
+    display:block;
+    padding-top: 5mm;
+}
+
+section {
+    float:left;
+    width: 45%;
+    padding-left: 10mm;
+}
+
+.right {
+    float:left;
+    width: 50%;
+    padding-top: 25mm;
+}
+
+.dropdown-contents {
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-contents a {
+    color: black;
+    background-color: #fafafa;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 52mm;
+}
+
+.dropdown-contents a:hover {
+    background-color: #f1f1f1;
+}
+
+.comment {
+    border-radius:5px;
+    border: 1px solid black;
+    width: 80%;
+    padding-left: 2mm;
+    padding-bottom: 2mm;
+}

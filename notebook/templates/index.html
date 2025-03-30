@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>NoteBook</h1>
+        </header>
+        <section class="right">
+            <article>
+                <h2>Notes</h2>
+                <div id="NoteBox"></div>
+                <script>
+                    let noteBox = document.getElementById("NoteBox");
+                    fetch(`/get_notes`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.length === 0) {
+                                noElement = document.createElement("a")
+                                noElement.textContent = "No notes yet! Feel free to create one below"
+                                noteBox.appendChild(noElement)
+                            } else {
+                                data.forEach(item => {
+                                    noteName = document.createElement("a")
+                                    noteName.textContent = data
+                                    noteName.setAttribute("href", `/note?name=${data}`)
+                                    noteBox.appendChild(noteName)
+                                });
+                            }
+                        });
+                </script>
+            </article>
+            <br>
+            <article>
+                    <h2>Make new note</h2>
+                    <label>Note Name: </label>
+                    <input type="text" id="name_text">
+                    <br>
+                    <label>Note Contents: </label>
+                    <input type="text" id="content_text">
+                    <button onclick="addNote()">Submit</button>
+                    <script>
+                        function addNote() {
+                            const name = document.getElementById('name_text');
+                            const contents = document.getElementById('content_text');
+                            fetch('/add_note', {
+                                method: 'POST',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({"name": name.value, "content": contents.value})
+                            });
+                            name.value = "";
+                            contents.value = "";
+                            location.reload();
+                        }
+                    </script>
+            </article>
+        </section>
+        <section>
+            <div class="dropdown-element">
+                <input type="text" placeholder="Search..." id="search-bar" name="term" class="searchbar">
+                <button onclick="search()" class="searchbar"> Search </button>
+                <div id="dropdown" class="dropdown-contents">
+                    <script>
+                        function search() {
+                            const searchBox = document.getElementById("search-bar");
+                            const dropdown = document.getElementById("dropdown");
+                            fetch(`/search?term=${searchBox.value}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    data.forEach(item => {
+                                        searchResult = document.createElement("a")
+                                        searchResult.textContent = data
+                                        searchResult.setAttribute("href", `/note?name=${data}`)
+                                        dropdown.appendChild(searchResult)
+                                    });
+                                });
+                            searchBox.value = "";
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

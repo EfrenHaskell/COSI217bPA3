@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>NoteBook</h1>
+            <a href="/"> Home </a>
+        </header>
+
+        <section class="right">
+            <h1> {{note_name}} </h1>
+            <p> {{note_contents}} </p>
+            {% for comment in comments %}
+            <div class="comment">
+                <h2> {{ comment.timestamp }} </h2>
+                <a> {{ comment.comment }}</a>
+                <br>
+            </div>
+            <br>
+            {% endfor %}
+            <button type="button" onclick="addComment()">
+                Add Comment
+            </button>
+            <button type="button" onclick="deleteNote()">
+                Delete Note
+            </button>
+            <div id="AddComment"></div>
+        </section>
+    </body>
+    <script src="{{ url_for('static', filename='js/toggle.js') }}"></script>
+</html>
